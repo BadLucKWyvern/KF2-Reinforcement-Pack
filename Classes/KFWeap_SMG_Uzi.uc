@@ -62,6 +62,16 @@ defaultproperties
 	PickupMeshName="WEP_UZIPRO_MESH.Wep_UZIPRO_Pickup"
 	AttachmentArchetypeName="WEP_UZIPRO_ARCH.Wep_UZIP_3P"
 	MuzzleFlashTemplateName="wep_MP7_arch.Wep_MP7_MuzzleFlash"
+	
+	HealingDartDamageType=class'KFDT_Dart_Healing'
+	DartFireSnd=(DefaultCue=AkEvent'WW_WEP_SA_MedicDart.Play_WEP_SA_Medic_Dart_Fire_3P', FirstPersonCue=AkEvent'WW_WEP_SA_MedicDart.Play_WEP_SA_Medic_Dart_Fire_1P')
+	LockAcquiredSoundFirstPerson=AkEvent'WW_WEP_SA_MedicDart.Play_WEP_SA_Medic_Alert_Locked_1P'
+	LockLostSoundFirstPerson=AkEvent'WW_WEP_SA_MedicDart.Play_WEP_SA_Medic_Alert_Lost_1P'
+	LockTargetingSoundFirstPerson=AkEvent'WW_WEP_SA_MedicDart.Play_WEP_SA_Medic_Alert_Locking_1P'
+    HealImpactSoundPlayEvent=AkEvent'WW_WEP_SA_MedicDart.Play_WEP_SA_Medic_Dart_Heal'
+    HurtImpactSoundPlayEvent=AkEvent'WW_WEP_SA_MedicDart.Play_WEP_SA_Medic_Dart_Hurt'
+	OpticsUIClass=class'KFGFxWorld_MedicOptics'
+	HealingDartWaveForm=ForceFeedbackWaveform'FX_ForceFeedback_ARCH.Gunfire.Default_Recoil'
 
 	// Ammo
 	MagazineCapacity[0]=36
@@ -101,6 +111,8 @@ defaultproperties
 
 	// ALTFIRE_FIREMODE
 	AmmoCost(ALTFIRE_FIREMODE)=30
+	WeaponProjectiles(ALTFIRE_FIREMODE)=class'KFProj_HealingDart_MedicBase'
+	InstantHitDamageTypes(ALTFIRE_FIREMODE)=class'KFDT_Dart_Toxic'
 
 	// BASH_FIREMODE
 	InstantHitDamage(BASH_FIREMODE)=30.0

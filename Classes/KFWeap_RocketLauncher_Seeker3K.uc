@@ -9,53 +9,14 @@
 //=============================================================================
 class KFWeap_RocketLauncher_Seeker3K extends KFWeap_GrenadeLauncher_Base;
 
-var(Weapon) array<byte>	NumPellets;
-
 /*********************************************************************************************
  Firing / Projectile - Below projectile spawning code copied from KFWeap_ShotgunBase
 ********************************************************************************************* */
-
-/** Spawn projectile is called once for each shot pellet fired */
-simulated function KFProjectile SpawnProjectile( class<KFProjectile> KFProjClass, vector RealStartLoc, vector AimDir )
-{
-	local int i;
-	local rotator AimRot;
-	local KFPerk InstigatorPerk;
-
-    if( CurrentFireMode == GRENADE_FIREMODE )
-    {
-        return Super.SpawnProjectile(KFProjClass, RealStartLoc, AimDir);
-    }
-
-    InstigatorPerk = GetPerk();
-    if( InstigatorPerk != none )
-    {
-    	Spread[CurrentFireMode] = default.Spread[CurrentFireMode] * InstigatorPerk.GetTightChokeModifier();
-    }
-
-	AimRot = rotator(AimDir);
-
-	for (i = 0; i < NumPellets[CurrentFireMode]; i++)
-	{
-		Super.SpawnProjectile(KFProjClass, RealStartLoc, vector(class'KFWeap_ShotgunBase'.static.AddMultiShotSpread(AimRot, Spread[CurrentFireMode])));
-	}
-
-	return None;
-}
 
 /** Disable normal bullet spread */
 simulated function rotator AddSpread(rotator BaseAim)
 {
 	return BaseAim; // do nothing
-}
-
-/** Notification that a weapon attack has has happened */
-function HandleWeaponShotTaken( byte FireMode )
-{
-    if( KFPlayer != None )
-	{
-        KFPlayer.AddShotsFired(NumPellets[FireMode]);
-	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////

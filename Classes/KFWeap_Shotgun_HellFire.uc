@@ -28,11 +28,11 @@ defaultproperties
 	IronSightPosition=(X=2,Y=0,Z=0)
 
 	PackageKey="Dual_HellFireS"
-	FirstPersonMeshName="'WEP_1P_Dual_HellFireS_MESH.Wep_1stP_HellFire_Single_Rig'"
-	FirstPersonAnimSetNames(0)="'WEP_1P_SW_500_ANIM.WEP_1stP_SW_500_Anim'"
-	PickupMeshName="'WEP_3P_Dual_HellFireS_MESH.Wep_HellFireS_Pickup'"
-	AttachmentArchetypeName="'WEP_Dual_HellFireS_ARCH.Wep_HellFire_3P'"
-	MuzzleFlashTemplateName="'WEP_Dual_SW_500_ARCH.Wep_Dual_SW_500_MuzzleFlash'"
+	FirstPersonMeshName="WEP_1P_Dual_HellFireS_MESH.Wep_1stP_HellFire_Single_Rig"
+	FirstPersonAnimSetNames(0)="WEP_1P_SW_500_ANIM.WEP_1stP_SW_500_Anim"
+	PickupMeshName="WEP_3P_Dual_HellFireS_MESH.Wep_HellFireS_Pickup"
+	AttachmentArchetypeName="WEP_Dual_HellFireS_ARCH.Wep_HellFire_3P"
+	MuzzleFlashTemplateName="WEP_Dual_SW_500_ARCH.Wep_Dual_SW_500_MuzzleFlash"
 
 	Begin Object Name=FirstPersonMesh
 		AnimTreeTemplate=AnimTree'CHR_1P_Arms_ARCH.WEP_1stP_Animtree_Master_Revolver'

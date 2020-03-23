@@ -24,4 +24,5 @@ defaultproperties
 
 	WeaponDef=class'KFWeapDef_Glock'
 	ModifierPerkList(0)=class'KFPerk_Gunslinger'
+	ModifierPerkList(1)=class'KFPerk_Swat'
 }

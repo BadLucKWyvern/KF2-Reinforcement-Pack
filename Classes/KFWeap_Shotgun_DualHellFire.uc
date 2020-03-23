@@ -4,55 +4,12 @@
 // Jeff Robinson
 //=============================================================================
 
-class KFWeap_Shotgun_DualHellFire extends KFWeap_DualBase;
-
-var(Weapon) array<byte>	NumPellets;
+//class KFWeap_Shotgun_DualHellFire extends KFWeap_DualBase;
+class KFWeap_Shotgun_DualHellFire extends KFWeap_Revolver_DualSW500;
 
 /*********************************************************************************************
  Firing / Projectile
 ********************************************************************************************* */
-
-/** Spawn projectile is called once for each shot pellet fired */
-simulated function KFProjectile SpawnProjectile( class<KFProjectile> KFProjClass, vector RealStartLoc, vector AimDir )
-{
-	local int i;
-	local rotator AimRot;
-	local KFPerk InstigatorPerk;
-
-    if( CurrentFireMode == GRENADE_FIREMODE )
-    {
-        return Super.SpawnProjectile(KFProjClass, RealStartLoc, AimDir);
-    }
-
-    InstigatorPerk = GetPerk();
-    if( InstigatorPerk != none )
-    {
-    	Spread[CurrentFireMode] = default.Spread[CurrentFireMode] * InstigatorPerk.GetTightChokeModifier();
-    }
-
-	AimRot = rotator(AimDir);
-
-	for (i = 0; i < GetNumProjectilesToFire(CurrentFireMode); i++)
-	{
-		Super.SpawnProjectile(KFProjClass, RealStartLoc, vector(class'KFWeap_ShotgunBase'.static.AddMultiShotSpread(AimRot, Spread[CurrentFireMode])));	}
-
-	return None;
-}
-
-/** Returns number of projectiles to fire from SpawnProjectile */
-simulated function byte GetNumProjectilesToFire(byte FireModeNum)
-{
-	return NumPellets[CurrentFireMode];
-}
-
-/** Notification that a weapon attack has has happened */
-function HandleWeaponShotTaken( byte FireMode )
-{
-    if( KFPlayer != None )
-	{
-        KFPlayer.AddShotsFired(GetNumProjectilesToFire( FireMode ));
-	}
-}
 
 /** Disable normal bullet spread */
 simulated function rotator AddSpread(rotator BaseAim)
@@ -61,7 +18,7 @@ simulated function rotator AddSpread(rotator BaseAim)
 }
 
  /** Same as AddSpread(), but used with MultiShotSpread */
-static function rotator AddMultiShotSpread( rotator BaseAim, float CurrentSpread )
+static function rotator AddMultiShotSpread( rotator BaseAim, float CurrentSpread, byte PelletNum )
 {
 	local vector X, Y, Z;
 	local float RandY, RandZ;
@@ -108,11 +65,11 @@ defaultproperties
 	SingleClass=class'KFWeap_Shotgun_HellFire'
 
 	PackageKey="Dual_HellFireS"
-	FirstPersonMeshName="'WEP_1P_Dual_HellFireS_MESH.Wep_1stP_Dual_HellFireS_Rig'"
-	FirstPersonAnimSetNames(0)="'WEP_1P_Dual_SW_500_ANIM.Wep_1stP_Dual_SW_500_Anim'"
-	PickupMeshName="'WEP_3P_Dual_HellFireS_MESH.Wep_HellFireS_Pickup'"
-	AttachmentArchetypeName="'WEP_Dual_HellFireS_ARCH.Wep_Dual_HellFireS_3P'"
-	MuzzleFlashTemplateName="'WEP_Dual_SW_500_ARCH.Wep_Dual_SW_500_MuzzleFlash'"
+	FirstPersonMeshName="WEP_1P_Dual_HellFireS_MESH.Wep_1stP_Dual_HellFireS_Rig"
+	FirstPersonAnimSetNames(0)="WEP_1P_Dual_SW_500_ANIM.Wep_1stP_Dual_SW_500_Anim"
+	PickupMeshName="WEP_3P_Dual_HellFireS_MESH.Wep_HellFireS_Pickup"
+	AttachmentArchetypeName="WEP_Dual_HellFireS_ARCH.Wep_Dual_HellFireS_3P"
+	MuzzleFlashTemplateName="WEP_Dual_SW_500_ARCH.Wep_Dual_SW_500_MuzzleFlash"
 	
 	Begin Object Name=FirstPersonMesh	
 		// new anim tree with skelcontrol to rotate cylinders

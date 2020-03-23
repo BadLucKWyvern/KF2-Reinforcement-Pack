@@ -1,5 +1,5 @@
 //=============================================================================
-// KFDT_Ballistic_AK12
+// KFDT_Ballistic_SCAR
 //=============================================================================
 // Class Description
 //=============================================================================
@@ -8,7 +8,7 @@
 //  - Author 10/30/2013
 //=============================================================================
 
-class KFDT_Ballistic_M16Medic extends KFDT_Ballistic_AssaultRifle
+class KFDT_Ballistic_CZ805_Commando extends KFDT_Ballistic_AssaultRifle
 	abstract
 	hidedropdown;
 
@@ -32,16 +32,16 @@ static simulated function bool CanDismemberHitZone( name InHitZoneName )
 
 defaultproperties
 {
-	KDamageImpulse=1000
+	KDamageImpulse=650//1100
+	GibImpulseScale=0.95
 	KDeathUpKick=-200
-	KDeathVel=135
+	KDeathVel=200
 	
-	StumblePower=15
+	StumblePower=25
 	GunHitPower=0
 
-	WeaponDef=class'KFWeapDef_M16Medic'
-
+	WeaponDef=class'KFWeapDef_CZ805_Commando'
+	
 	//Perk
-	ModifierPerkList(0)=class'KFPerk_FieldMedic'
-	ModifierPerkList(1)=class'KFPerk_Commando'
+	ModifierPerkList(0)=class'KFPerk_Commando'
 }

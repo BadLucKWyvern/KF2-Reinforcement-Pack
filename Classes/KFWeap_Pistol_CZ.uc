@@ -95,7 +95,7 @@ defaultproperties
 	FireInterval(DEFAULT_FIREMODE)=+0.2
 	InstantHitDamage(DEFAULT_FIREMODE)=34.0
 	InstantHitDamageTypes(DEFAULT_FIREMODE)=class'KFDT_Ballistic_Pistol_CZ'
-	InstantHitDamageTypes(BASH_FIREMODE)=class'KFDT_Bludgeon_Pistol_CZ'
+	InstantHitDamageTypes(BASH_FIREMODE)=class'KFDT_Bludgeon_P226'
 	Spread(DEFAULT_FIREMODE)=0.019
 	FireOffset=(X=20,Y=4.0,Z=-3)
 

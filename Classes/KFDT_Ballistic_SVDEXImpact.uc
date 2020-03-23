@@ -24,5 +24,6 @@ defaultproperties
 
 	WeaponDef=class'KFWeapDef_SVDEX'
 
-	ModifierPerkList(0)=class'KFPerk_Survivalist'
+	ModifierPerkList(0)=class'KFPerk_Sharpshooter'
+	ModifierPerkList(1)=class'KFPerk_Demolitionist'
 }

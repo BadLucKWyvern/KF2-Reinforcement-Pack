@@ -3,53 +3,14 @@
 //=============================================================================
 class KFWeap_Medic_H134 extends KFWeap_MedicBase;
 
-var(Weapon) array<byte> NumPellets;
-
 /*********************************************************************************************
  Firing / Projectile - Below projectile spawning code copied from KFWeap_ShotgunBase
 ********************************************************************************************* */
-
-/** Spawn projectile is called once for each shot pellet fired */
-simulated function KFProjectile SpawnProjectile( class<KFProjectile> KFProjClass, vector RealStartLoc, vector AimDir )
-{
-    local int i;
-    local rotator AimRot;
-    local KFPerk InstigatorPerk;
-
-    if( CurrentFireMode == GRENADE_FIREMODE )
-    {
-        return Super.SpawnProjectile(KFProjClass, RealStartLoc, AimDir);
-    }
-
-    InstigatorPerk = GetPerk();
-    if( InstigatorPerk != none )
-    {
-        Spread[CurrentFireMode] = default.Spread[CurrentFireMode] * InstigatorPerk.GetTightChokeModifier();
-    }
-
-    AimRot = rotator(AimDir);
-
-    for (i = 0; i < NumPellets[CurrentFireMode]; i++)
-    {
-        Super.SpawnProjectile(KFProjClass, RealStartLoc, vector(class'KFWeap_ShotgunBase'.static.AddMultiShotSpread(AimRot, Spread[CurrentFireMode])));
-    }
-
-    return None;
-}
 
 /** Disable normal bullet spread */
 simulated function rotator AddSpread(rotator BaseAim)
 {
     return BaseAim; // do nothing
-}
-
-/** Notification that a weapon attack has has happened */
-function HandleWeaponShotTaken( byte FireMode )
-{
-    if( KFPlayer != None )
-    {
-        KFPlayer.AddShotsFired(NumPellets[FireMode]);
-    }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -106,6 +67,16 @@ defaultproperties
     MuzzleFlashTemplateName="WEP_H134_ARCH.Wep_H134_MuzzleFlash"
 
     LaserSightTemplate=KFLaserSightAttachment'FX_LaserSight_ARCH.LaserSight_WithAttachment_1P'
+	
+	HealingDartDamageType=class'KFDT_Dart_Healing'
+	DartFireSnd=(DefaultCue=AkEvent'WW_WEP_SA_MedicDart.Play_WEP_SA_Medic_Dart_Fire_3P', FirstPersonCue=AkEvent'WW_WEP_SA_MedicDart.Play_WEP_SA_Medic_Dart_Fire_1P')
+	LockAcquiredSoundFirstPerson=AkEvent'WW_WEP_SA_MedicDart.Play_WEP_SA_Medic_Alert_Locked_1P'
+	LockLostSoundFirstPerson=AkEvent'WW_WEP_SA_MedicDart.Play_WEP_SA_Medic_Alert_Lost_1P'
+	LockTargetingSoundFirstPerson=AkEvent'WW_WEP_SA_MedicDart.Play_WEP_SA_Medic_Alert_Locking_1P'
+    HealImpactSoundPlayEvent=AkEvent'WW_WEP_SA_MedicDart.Play_WEP_SA_Medic_Dart_Heal'
+    HurtImpactSoundPlayEvent=AkEvent'WW_WEP_SA_MedicDart.Play_WEP_SA_Medic_Dart_Hurt'
+	OpticsUIClass=class'KFGFxWorld_MedicOptics'
+	HealingDartWaveForm=ForceFeedbackWaveform'FX_ForceFeedback_ARCH.Gunfire.Default_Recoil'
 
     // Ammo
     MagazineCapacity[0]=30
@@ -175,6 +146,8 @@ defaultproperties
     AmmoCost(ALTFIRE_FIREMODE)=30
     NumPellets(ALTFIRE_FIREMODE)=1
     FireModeIconPaths(ALTFIRE_FIREMODE)=Texture2D'ui_firemodes_tex.UI_FireModeSelect_MedicDart'
+	WeaponProjectiles(ALTFIRE_FIREMODE)=class'KFProj_HealingDart_MedicBase'
+	InstantHitDamageTypes(ALTFIRE_FIREMODE)=class'KFDT_Dart_Toxic'
 
     // BASH_FIREMODE
     InstantHitDamageTypes(BASH_FIREMODE)=class'KFDT_Bludgeon_Hemogoblin'

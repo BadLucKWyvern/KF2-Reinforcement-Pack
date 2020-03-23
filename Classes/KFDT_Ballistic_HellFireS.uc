@@ -49,4 +49,5 @@ defaultproperties
 	GunHitPower=0
 
 	WeaponDef=class'KFWeapDef_HellFireS'
+	ModifierPerkList(0)=class'KFPerk_Support'
 }

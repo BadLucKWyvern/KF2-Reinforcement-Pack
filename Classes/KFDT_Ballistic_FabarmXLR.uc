@@ -49,4 +49,6 @@ defaultproperties
 	GunHitPower=0
 
 	WeaponDef=class'KFWeapDef_FabarmXLR'
+	
+	ModifierPerkList(0)=class'KFPerk_Support'
 }
